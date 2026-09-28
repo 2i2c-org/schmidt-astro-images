@@ -1,0 +1,16 @@
+channels:
+  - conda-forge
+
+dependencies:
+  # Include dependencies here that are *not* in the base image
+  # This can be pretty short
+
+  # Everyone wants to use nbgitpuller for distributing content, so include that
+  - nbgitpuller
+  - astropy
+
+  # Install some other UI
+  - code-server
+  - openssh
+  - jupyter-vscode-proxy
+  - jupyter-sshd-proxy

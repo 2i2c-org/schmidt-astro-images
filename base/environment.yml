@@ -2,15 +2,18 @@ channels:
   - conda-forge
 
 dependencies:
-  # Include dependencies here that are *not* in the base image
-  # This can be pretty short
-
   # Everyone wants to use nbgitpuller for distributing content, so include that
   - nbgitpuller
+
+  # Astropy also seems a staple, so let's install it in the base
   - astropy
 
-  # Install some other UI
-  - code-server
-  - openssh
+  # Install some other UI that is commonly used
+  - code-server  # open source vscode
   - jupyter-vscode-proxy
+  # ssh, so folsk can ssh in
+  - openssh
   - jupyter-sshd-proxy
+
+  # Since many subpackages will use pip
+  - pip

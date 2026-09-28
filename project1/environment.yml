@@ -1,7 +1,0 @@
-channels:
-  - conda-forge
-
-dependencies:
-  # Include dependencies here that are *not* in the base image (pangeo + base here)
-  # This can be pretty short
-  - ephem

@@ -25,7 +25,7 @@ target "base" {
 target "project" {
   name = "project-${dir}"
   matrix = {
-    dir = ["project1", "project2"]
+    dir = ["florence-symposium"]
   }
   context = "${dir}"
   contexts = {

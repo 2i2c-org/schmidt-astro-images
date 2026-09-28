@@ -47,7 +47,7 @@ jobs:
         source: .
         push: true
         vars: |
-          image_name_prefix=quay.io/2i2c/example-image-stack-
+          image_name_prefix=quay.io/2i2c/schmidt-astro-
           git_sha=${{ steps.vars.outputs.git_sha_short}}
 
 

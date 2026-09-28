@@ -8,6 +8,9 @@ dependencies:
   # Astropy also seems a staple, so let's install it in the base
   - astropy
 
+  # A bunch of packages have no wheels or conda-forge packages and need gcc at image build time
+  - gcc
+
   # Install some other UI that is commonly used
   - code-server  # open source vscode
   - jupyter-vscode-proxy

@@ -2,5 +2,22 @@ channels:
   - conda-forge
 
 dependencies:
+  # DSA-2000 pulsar notebooks: PSRCHIVE and tempo2 are conda-forge only
+  - psrchive
+  - tempo2
+
   - pip:
-      - slicersim
+      # Lazuli. The IFS and ESC notebooks need slicersim 1.3.4 (LazuliKilonova);
+      # PyPI is at 1.3.0, so pin the GitHub commit until Mickael releases it.
+      - slicersim @ git+https://github.com/MickaelRigault/slicersim.git@de16061bf3aca49128d1a872ca9408f816ec31de
+      - wcc-etc[lightcurve]   # transit notebooks need jaxoplanet via lazuli-exo[transit]
+      - esc-etc
+      - wcc-sim
+      - lazuli-exo
+
+      # Argus (argus_sim is not on PyPI; it lives in the hackathon repo)
+      - argus_sim @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=argus/argus_survey_model
+      - redback
+
+      # DSA-2000 helper package, same repo
+      - convening2026-release @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=dsa/convening2026-release-2026.9.28

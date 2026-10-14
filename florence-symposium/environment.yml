@@ -6,6 +6,10 @@ dependencies:
   - psrchive
   - tempo2
 
+  # for Argus, these are also conda-forge only (sncosmo needs gcc otherwise)
+  - sncosmo
+  - boto3  
+
   - pip:
       # Lazuli. The IFS and ESC notebooks need slicersim 1.3.4 (LazuliKilonova);
       # PyPI is at 1.3.0, so pin the GitHub commit until Mickael releases it.
@@ -17,7 +21,7 @@ dependencies:
 
       # Argus (argus_sim is not on PyPI; it lives in the hackathon repo)
       - argus_sim @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=argus/argus_survey_model
-      - redback
+      - redback # needed for tutorial_survey_data.ipynb but not listed as dep so adding here
 
       # DSA-2000 helper package, same repo
       - convening2026-release @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=dsa/convening2026-release-2026.9.28

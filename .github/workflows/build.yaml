@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   build-and-push:
@@ -26,6 +27,7 @@ jobs:
 
     - name: Login to DockerHub
       uses: docker/login-action@v4
+      if: github.ref == 'main' && github.event_name == 'push'
       with:
         registry: quay.io
         username: ${{ secrets.QUAY_USERNAME }}
@@ -45,7 +47,7 @@ jobs:
       uses: docker/bake-action@v7
       with:
         source: .
-        push: true
+        push: ${{ github.event_name == 'push' && github.ref == 'main'}}
         vars: |
           image_name_prefix=quay.io/2i2c/schmidt-astro-
           git_sha=${{ steps.vars.outputs.git_sha_short}}

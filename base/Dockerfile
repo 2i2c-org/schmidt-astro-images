@@ -23,6 +23,12 @@ RUN ${NB_PYTHON_PREFIX}/bin/uv pip install \
       --prerelease=allow \
       "jupyter-ai==3.2.0a1"
 
+# System-wide Claude Code settings. Lives in /etc, not $HOME, because the hub mounts a
+# persistent home over /home/jovyan and would hide anything written there at build time.
+# Symbolic mode: files 644, directories 755. A plain --chmod=644 also strips the execute bit from the
+# /etc/claude-code directory BuildKit creates, which makes the file unreadable for the notebook user.
+COPY --chmod=u=rwX,go=rX managed-settings.json /etc/claude-code/managed-settings.json
+
 # Fail the build if the AI layer is incomplete.
 RUN node --version | grep -E '^v(2[2-9]|[3-9][0-9])\.' \
  && claude --version | grep -F "2.1.220" \
@@ -36,3 +42,6 @@ RUN node --version | grep -E '^v(2[2-9]|[3-9][0-9])\.' \
 RUN ! ${NB_PYTHON_PREFIX}/bin/uv pip check --python ${NB_PYTHON_PREFIX}/bin/python 2>&1 \
       | grep '^The package' \
       | grep -vE '`(xmip|lonboard|pygobject|pycairo)`'
+
+# The image, not the hub, decides the model names; nothing relaxes the permission mode.
+RUN ${NB_PYTHON_PREFIX}/bin/python -c "import json; s = json.load(open('/etc/claude-code/managed-settings.json')); e = s['env']; assert e['ANTHROPIC_MODEL'] == 'claude-sonnet-4-6'; assert e['ANTHROPIC_DEFAULT_SONNET_MODEL'] == 'claude-sonnet-4-6'; assert e['ANTHROPIC_DEFAULT_HAIKU_MODEL'] == 'claude-haiku-4-5'; assert e['ANTHROPIC_SMALL_FAST_MODEL'] == 'claude-haiku-4-5'; assert 'permissions' not in s, 'must not change permission mode'"

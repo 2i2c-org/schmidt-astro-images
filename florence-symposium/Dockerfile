@@ -11,12 +11,14 @@ ENV PYTHONPATH=/home/jovyan/viss-agentic-ai-workshop-tsos-2026/workshop_agent/sr
 
 # Fail the build if the combined hackathon + VISS environment is broken.
 RUN ${NB_PYTHON_PREFIX}/bin/python -c "import psrchive, sncosmo, boto3, s3fs, redback, argus_sim, convening2026, pint.toa, litellm, dotenv, statsmodels, scipy, numpy, pandas; assert int(pandas.__version__.split('.')[0]) >= 3, pandas.__version__; print('pandas', pandas.__version__, 'numpy', numpy.__version__)"
-RUN ${NB_PYTHON_PREFIX}/bin/python -c "import importlib.metadata as m; print({d: m.version(d) for d in ('slicersim', 'wcc-etc', 'esc-etc', 'wcc-sim', 'lazuli-exo', 'argus-sim', 'convening2026-release')})" \
+RUN ${NB_PYTHON_PREFIX}/bin/python -c "import numba, slicersim, wcc_etc, esc_etc, wcc_phot, wcc_sim, lazuli_exo, jaxoplanet; print('numba', numba.__version__)" \
  && command -v tempo2
 
 # pip (litellm, lazuli, ...) can drift away from what conda installed, e.g. a newer botocore than
 # aiobotocore/s3fs allow, which breaks S3 access at runtime while imports still succeed. Fail on
 # `uv pip check` problems outside the 4 already present in the stock pangeo-notebook image.
-RUN ! ${NB_PYTHON_PREFIX}/bin/uv pip check --python ${NB_PYTHON_PREFIX}/bin/python 2>&1 \
-      | grep '^The package' \
-      | grep -vE '`(xmip|lonboard|pygobject|pycairo)`'
+# Fail closed: require proof that uv ran ("Checked N packages"), and only ignore a problem whose
+# subject (the first package named on the line) is a baseline package.
+RUN out=$(${NB_PYTHON_PREFIX}/bin/uv pip check --python ${NB_PYTHON_PREFIX}/bin/python 2>&1 || true) \
+ && printf '%s\n' "$out" | grep -qE '^Checked [0-9]+ packages' \
+ && ! printf '%s\n' "$out" | grep '^The package' | grep -vE '^The package `(xmip|lonboard|pygobject|pycairo)`'

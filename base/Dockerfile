@@ -39,9 +39,11 @@ RUN node --version | grep -E '^v(2[2-9]|[3-9][0-9])\.' \
 # The stock pangeo-notebook image already reports 4 `uv pip check` problems (xmip/xgcm,
 # lonboard/anywidget, and pygobject/pycairo, which conda ships without WHEEL files). Fail only
 # on problems outside that baseline, so the jupyter-ai pre-release cannot silently break anything new.
-RUN ! ${NB_PYTHON_PREFIX}/bin/uv pip check --python ${NB_PYTHON_PREFIX}/bin/python 2>&1 \
-      | grep '^The package' \
-      | grep -vE '`(xmip|lonboard|pygobject|pycairo)`'
+# Fail closed: require proof that uv ran ("Checked N packages"), and only ignore a problem whose
+# subject (the first package named on the line) is a baseline package.
+RUN out=$(${NB_PYTHON_PREFIX}/bin/uv pip check --python ${NB_PYTHON_PREFIX}/bin/python 2>&1 || true) \
+ && printf '%s\n' "$out" | grep -qE '^Checked [0-9]+ packages' \
+ && ! printf '%s\n' "$out" | grep '^The package' | grep -vE '^The package `(xmip|lonboard|pygobject|pycairo)`'
 
 # The image, not the hub, decides the model names; nothing relaxes the permission mode.
-RUN ${NB_PYTHON_PREFIX}/bin/python -c "import json; s = json.load(open('/etc/claude-code/managed-settings.json')); e = s['env']; assert e['ANTHROPIC_MODEL'] == 'claude-sonnet-4-6'; assert e['ANTHROPIC_DEFAULT_SONNET_MODEL'] == 'claude-sonnet-4-6'; assert e['ANTHROPIC_DEFAULT_HAIKU_MODEL'] == 'claude-haiku-4-5'; assert e['ANTHROPIC_SMALL_FAST_MODEL'] == 'claude-haiku-4-5'; assert 'permissions' not in s, 'must not change permission mode'"
+RUN ${NB_PYTHON_PREFIX}/bin/python -c "import json; s = json.load(open('/etc/claude-code/managed-settings.json')); e = s['env']; assert e['ANTHROPIC_MODEL'] == 'claude-sonnet-4-6'; assert e['ANTHROPIC_DEFAULT_SONNET_MODEL'] == 'claude-sonnet-4-6'; assert e['ANTHROPIC_DEFAULT_HAIKU_MODEL'] == 'claude-haiku-4-5'; assert e['ANTHROPIC_SMALL_FAST_MODEL'] == 'claude-haiku-4-5'; assert e['DISABLE_AUTOUPDATER'] == '1', 'the npm pins must not auto-update'; assert 'permissions' not in s, 'must not change permission mode'"

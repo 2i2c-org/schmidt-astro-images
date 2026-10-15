@@ -34,8 +34,10 @@ dependencies:
       - argus_sim @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=argus/argus_survey_model
       - redback # needed for tutorial_survey_data.ipynb but not listed as dep so adding here
 
-      # VISS notebooks talk to the gateway through the litellm SDK
-      - litellm>=1.50.0
+      # VISS notebooks talk to the gateway through the litellm SDK. Pinned (the VISS repo asks for
+      # >=1.50.0): it sits next to the gateway credentials and its boto3 floor already forced the
+      # conda boto3 pin above. Bump deliberately and re-run the build checks.
+      - litellm==1.105.1
 
       # DSA-2000 helper package, same repo
       - convening2026-release @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=dsa/convening2026-release-2026.9.28

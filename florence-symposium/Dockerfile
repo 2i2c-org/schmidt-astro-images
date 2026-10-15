@@ -7,7 +7,7 @@ RUN mamba env update --prefix ${NB_PYTHON_PREFIX} --file /tmp/environment.yml
 # workshop_agent and sci_units live inside the VISS repo. nbgitpuller pulls it to
 # ~/viss-agentic-ai-workshop-tsos-2026 (the link generator must set that targetPath).
 # They are imported from the checkout, not installed, so participants' edits take effect.
-ENV PYTHONPATH=/home/jovyan/viss-agentic-ai-workshop-tsos-2026/workshop_agent/src:/home/jovyan/viss-agentic-ai-workshop-tsos-2026/blocks/01-landscape/demo/starter/src
+RUN ${NB_PYTHON_PREFIX}/bin/uv pip install -e ${HOME}/viss-agentic-ai-workshop-tsos-2026
 
 # Fail the build if the combined hackathon + VISS environment is broken.
 RUN ${NB_PYTHON_PREFIX}/bin/python -c "import psrchive, sncosmo, boto3, s3fs, redback, argus_sim, convening2026, pint.toa, litellm, dotenv, statsmodels, scipy, numpy, pandas; assert int(pandas.__version__.split('.')[0]) >= 3, pandas.__version__; print('pandas', pandas.__version__, 'numpy', numpy.__version__)"

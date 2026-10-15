@@ -27,7 +27,9 @@ RUN ${NB_PYTHON_PREFIX}/bin/uv pip install \
 # persistent home over /home/jovyan and would hide anything written there at build time.
 # Symbolic mode: files 644, directories 755. A plain --chmod=644 also strips the execute bit from the
 # /etc/claude-code directory BuildKit creates, which makes the file unreadable for the notebook user.
-COPY --chmod=u=rwX,go=rX managed-settings.json /etc/claude-code/managed-settings.json
+# Make expected claude directory
+RUN mkdir ${HOME}/.claude
+COPY --chmod=u=rwX,go=rX managed-settings.json ${HOME}/.claude/settings.json
 
 # Fail the build if the AI layer is incomplete.
 RUN node --version | grep -E '^v(2[2-9]|[3-9][0-9])\.' \

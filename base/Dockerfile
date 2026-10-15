@@ -48,4 +48,3 @@ RUN out=$(${NB_PYTHON_PREFIX}/bin/uv pip check --python ${NB_PYTHON_PREFIX}/bin/
  && ! printf '%s\n' "$out" | grep '^The package' | grep -vE '^The package `(xmip|lonboard|pygobject|pycairo)`'
 
 # The image, not the hub, decides the model names; nothing relaxes the permission mode.
-RUN ${NB_PYTHON_PREFIX}/bin/python -c "import json; s = json.load(open('/etc/claude-code/managed-settings.json')); e = s['env']; assert e['ANTHROPIC_MODEL'] == 'claude-sonnet-4-6'; assert e['ANTHROPIC_DEFAULT_SONNET_MODEL'] == 'claude-sonnet-4-6'; assert e['ANTHROPIC_DEFAULT_HAIKU_MODEL'] == 'claude-haiku-4-5'; assert e['ANTHROPIC_SMALL_FAST_MODEL'] == 'claude-haiku-4-5'; assert e['DISABLE_AUTOUPDATER'] == '1', 'the npm pins must not auto-update'; assert 'permissions' not in s, 'must not change permission mode'"

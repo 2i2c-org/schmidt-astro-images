@@ -8,7 +8,18 @@ dependencies:
 
   # for Argus, these are also conda-forge only (sncosmo needs gcc otherwise)
   - sncosmo
-  - boto3  
+  - boto3>=1.43.1  # litellm (pip, below) needs >=1.43.1; solving it here keeps botocore consistent with aiobotocore/s3fs  
+
+  # VISS agentic-ai workshop (schmidt-sciences/viss-agentic-ai-workshop-tsos-2026).
+  # Mirrors its pyproject.toml. `pint` is deliberately omitted: nothing in the repo imports it, and
+  # its module name collides with pint-pulsar (pulled in by convening2026-release below).
+  # pandas>=3 is above the pangeo base's own pin; a dry-run solve found no removals.
+  - pandas>=3.0.3
+  - numpy>=2
+  - scipy>=1.17.1
+  - statsmodels>=0.14.6
+  - pytest>=8.3
+  - python-dotenv
 
   - pip:
       # Lazuli. The IFS and ESC notebooks need slicersim 1.3.4 (LazuliKilonova);
@@ -22,6 +33,9 @@ dependencies:
       # Argus (argus_sim is not on PyPI; it lives in the hackathon repo)
       - argus_sim @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=argus/argus_survey_model
       - redback # needed for tutorial_survey_data.ipynb but not listed as dep so adding here
+
+      # VISS notebooks talk to the gateway through the litellm SDK
+      - litellm>=1.50.0
 
       # DSA-2000 helper package, same repo
       - convening2026-release @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=dsa/convening2026-release-2026.9.28

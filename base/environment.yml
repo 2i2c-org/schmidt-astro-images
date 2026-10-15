@@ -20,3 +20,9 @@ dependencies:
 
   # Since many subpackages will use pip
   - pip
+
+  # claude-agent-acp (the bridge JupyterAI's @Claude persona launches) requires node 22+
+  - nodejs>=22
+
+  # installs the jupyter-ai pre-release family from PyPI after the conda step
+  - uv

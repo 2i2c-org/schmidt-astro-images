@@ -8,7 +8,11 @@ dependencies:
 
   # for Argus, these are also conda-forge only (sncosmo needs gcc otherwise)
   - sncosmo
-  - boto3>=1.43.1  # litellm (pip, below) needs >=1.43.1; solving it here keeps botocore consistent with aiobotocore/s3fs  
+  - boto3
+
+  # Some AI tooling
+  - jupyter-ai=3.2
+  - nodejs
 
   # VISS agentic-ai workshop (schmidt-sciences/viss-agentic-ai-workshop-tsos-2026).
   # Mirrors its pyproject.toml. `pint` is deliberately omitted: nothing in the repo imports it, and
@@ -34,10 +38,9 @@ dependencies:
       - argus_sim @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=argus/argus_survey_model
       - redback # needed for tutorial_survey_data.ipynb but not listed as dep so adding here
 
-      # VISS notebooks talk to the gateway through the litellm SDK. Pinned (the VISS repo asks for
-      # >=1.50.0): it sits next to the gateway credentials and its boto3 floor already forced the
-      # conda boto3 pin above. Bump deliberately and re-run the build checks.
-      - litellm==1.105.1
-
       # DSA-2000 helper package, same repo
       - convening2026-release @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=dsa/convening2026-release-2026.9.28
+
+      # VISS notebooks talk to the gateway through the litellm SDK. Pinned (the VISS repo asks for
+      # >=1.50.0). It requires a newer boto3, which is bumped up earlier.
+      - litellm==1.105.1

@@ -10,4 +10,5 @@ ARG CLAUDE_CODE_VERSION=2.1.220
 ARG CLAUDE_AGENT_ACP_VERSION=0.91.0
 RUN npm install -g --prefix ${NB_PYTHON_PREFIX} \
       @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} \
-      @agentclientprotocol/claude-agent-acp@${CLAUDE_AGENT_ACP_VERSION}
+      @agentclientprotocol/claude-agent-acp@${CLAUDE_AGENT_ACP_VERSION} \
+      npm cache clean --force

@@ -44,3 +44,10 @@ dependencies:
       # VISS notebooks talk to the gateway through the litellm SDK. Pinned (the VISS repo asks for
       # >=1.50.0). It requires a newer boto3, which is bumped up earlier.
       - litellm==1.105.1
+
+      # SSEC Tutorial
+      # Block 2's notebook imports `workshop_agent` from the subdirectory below.
+      # The `starter` code must be installed as 'editable' in participants *HOME* folders so that code changes are reflected.
+      # 1. https://github.com/schmidt-sciences/viss-agentic-ai-workshop-tsos-2026 gets pulled with an nbgitpuller link
+      # 2. participants must run `pip install --user -e ~/viss-agentic-ai-workshop-tsos-2026/blocks/01-landscape/demo/starter`
+      - workshop-agent @ git+https://github.com/schmidt-sciences/viss-agentic-ai-workshop-tsos-2026.git@main#subdirectory=workshop_agent

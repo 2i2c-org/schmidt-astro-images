@@ -25,6 +25,16 @@ dependencies:
   - pytest>=8.3
   - python-dotenv
 
+  # VISS workshop: ovro-lwa-portal and astrowidget need Zarr v2, so these pins downgrade
+  # zarr, xarray, dask and numcodecs for the whole image.
+  - zarr>=2.18.7,<3
+  - xarray<2026
+  - dask<2026
+  - numcodecs>=0.15,<0.16
+  # litellm (pip, below) needs boto3>=1.43.1. Let conda install it so boto3, aiobotocore and s3fs
+  # stay compatible; if pip upgrades boto3 instead, it falls back to s3fs 0.4.2.
+  - boto3>=1.43.1
+
   - pip:
       # Lazuli. The IFS and ESC notebooks need slicersim 1.3.4 (LazuliKilonova);
       # PyPI is at 1.3.0, so pin the GitHub commit until Mickael releases it.
@@ -44,6 +54,10 @@ dependencies:
       # VISS notebooks talk to the gateway through the litellm SDK. Pinned (the VISS repo asks for
       # >=1.50.0). It requires a newer boto3, which is bumped up earlier.
       - litellm==1.105.1
+
+      # VISS workshop, see the Zarr v2 pins above
+      - astrowidget==0.2.0
+      - ovro-lwa-portal @ git+https://github.com/ovro-lwa/ovro-lwa-portal.git@809aaf49c8723334d03be4088cbb4d795381d333
 
       # SSEC Tutorial
       # Block 2's notebook imports `workshop_agent` from the subdirectory below.

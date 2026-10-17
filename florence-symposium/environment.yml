@@ -31,6 +31,9 @@ dependencies:
   - xarray<2026
   - dask<2026
   - numcodecs>=0.15,<0.16
+  # litellm (pip, below) needs boto3>=1.43.1. Let conda install it so boto3, aiobotocore and s3fs
+  # stay compatible; if pip upgrades boto3 instead, it falls back to s3fs 0.4.2.
+  - boto3>=1.43.1
 
   - pip:
       # Lazuli. The IFS and ESC notebooks need slicersim 1.3.4 (LazuliKilonova);

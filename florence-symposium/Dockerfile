@@ -11,8 +11,8 @@ ARG CLAUDE_CODE_VERSION=2.1.292
 ARG CLAUDE_AGENT_ACP_VERSION=0.91.0
 RUN npm install -g --prefix ${NB_PYTHON_PREFIX} \
       @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} \
-      @agentclientprotocol/claude-agent-acp@${CLAUDE_AGENT_ACP_VERSION} \
-      npm cache clean --force
+      @agentclientprotocol/claude-agent-acp@${CLAUDE_AGENT_ACP_VERSION} && \
+    npm cache clean --force
 
 # Default models for Claude Code. Users can override these in ~/.claude/settings.json ("env" block),
 # with `claude --model`, or with /model in a session.

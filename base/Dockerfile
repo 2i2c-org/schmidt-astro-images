@@ -1,5 +1,5 @@
 # Inherit from an upstream image
-FROM pangeo/pangeo-notebook:2026.06.04
+FROM pangeo/base-notebook:2026.10.15
 
 # We copy the `environment.yml` file in this repo, only adding in extra
 # packages that aren't in our base image.

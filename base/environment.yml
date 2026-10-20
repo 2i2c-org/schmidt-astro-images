@@ -20,3 +20,6 @@ dependencies:
 
   # Since many subpackages will use pip
   - pip
+
+  # Allow git+https syntax for pip packages
+  - git

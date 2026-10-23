@@ -36,13 +36,14 @@ dependencies:
   - boto3>=1.43.1
 
   - pip:
-      # Lazuli. The IFS and ESC notebooks need slicersim 1.3.4 (LazuliKilonova);
-      # PyPI is at 1.3.0, so pin the GitHub commit until Mickael releases it.
-      - slicersim @ git+https://github.com/MickaelRigault/slicersim.git@de16061bf3aca49128d1a872ca9408f816ec31de
+      # Lazuli. The IFS and ESC notebooks need slicersim
+      - slicersim
       - wcc-etc[lightcurve]   # transit notebooks need jaxoplanet via lazuli-exo[transit]
       - esc-etc
       - wcc-sim
       - lazuli-exo
+      - lazuli-astrosim-data 
+      - skysurvey 
 
       # Argus (argus_sim is not on PyPI; it lives in the hackathon repo)
       - argus_sim @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=argus/argus_survey_model

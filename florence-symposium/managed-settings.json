@@ -6,6 +6,10 @@
   "permissions": {
     "defaultMode": "default"
   },
+  "statusLine": {
+    "type": "command",
+    "command": "/srv/conda/envs/notebook/bin/python3 /etc/claude-code/budget-statusline.py"
+  },
   "extraKnownMarketplaces": {
     "rse-plugins": {
       "source": {

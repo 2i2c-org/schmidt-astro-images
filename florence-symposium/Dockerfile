@@ -24,7 +24,8 @@ ENV ANTHROPIC_MODEL=sonnet \
 # Hub-wide Claude Code managed settings: apply to every user and can't be overridden.
 #   availableModels         only Sonnet and Haiku can be picked in /model or user settings
 #   permissions.defaultMode sessions start in manual mode, not auto; users can still Shift+Tab to auto
+#   statusLine              shows today's (UTC) LiteLLM spend against the $20 daily budget
 #   extraKnownMarketplaces  registers the uw-ssec/rse-plugins marketplace from GitHub
 #   enabledPlugins          installs these three plugins at each user's first session
 # See https://code.claude.com/docs/en/managed-settings
-COPY managed-settings.json /etc/claude-code/managed-settings.json
+COPY managed-settings.json budget-statusline.py /etc/claude-code/

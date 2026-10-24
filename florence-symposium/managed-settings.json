@@ -1,0 +1,26 @@
+{
+  "availableModels": [
+    "sonnet",
+    "haiku"
+  ],
+  "permissions": {
+    "defaultMode": "default"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "/srv/conda/envs/notebook/bin/python3 /etc/claude-code/budget-statusline.py"
+  },
+  "extraKnownMarketplaces": {
+    "rse-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "uw-ssec/rse-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "scientific-python-development@rse-plugins": true,
+    "ai-research-workflows@rse-plugins": true,
+    "research-software-design@rse-plugins": true
+  }
+}

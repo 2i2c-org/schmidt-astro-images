@@ -20,3 +20,11 @@ ENV ANTHROPIC_MODEL=sonnet \
     ANTHROPIC_DEFAULT_SONNET_MODEL=claude-sonnet-4-6 \
     ANTHROPIC_DEFAULT_HAIKU_MODEL=claude-haiku-4-5 \
     DISABLE_AUTOUPDATER=1
+
+# Hub-wide Claude Code managed settings: apply to every user and can't be overridden.
+#   availableModels         only Sonnet and Haiku can be picked in /model, --model, or user settings
+#   permissions.defaultMode sessions start in manual mode, not auto; users can still Shift+Tab to auto
+#   extraKnownMarketplaces  registers the uw-ssec/rse-plugins marketplace from GitHub
+#   enabledPlugins          installs these three plugins at each user's first session
+# See https://code.claude.com/docs/en/managed-settings
+COPY managed-settings.json /etc/claude-code/managed-settings.json

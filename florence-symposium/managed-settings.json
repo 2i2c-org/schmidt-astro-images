@@ -1,0 +1,22 @@
+{
+  "availableModels": [
+    "sonnet",
+    "haiku"
+  ],
+  "permissions": {
+    "defaultMode": "default"
+  },
+  "extraKnownMarketplaces": {
+    "rse-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "uw-ssec/rse-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "scientific-python-development@rse-plugins": true,
+    "ai-research-workflows@rse-plugins": true,
+    "research-software-design@rse-plugins": true
+  }
+}

@@ -37,11 +37,11 @@ dependencies:
 
   - pip:
       # Lazuli. The IFS and ESC notebooks need slicersim
-      - slicersim
-      - wcc-etc[lightcurve]   # transit notebooks need jaxoplanet via lazuli-exo[transit]
-      - esc-etc
-      - wcc-sim
-      - lazuli-exo
+      - slicersim>=1.4.1
+      - wcc-etc[lightcurve]>=0.1.1   # transit notebooks need jaxoplanet via lazuli-exo[transit]
+      - esc-etc>=0.1.0
+      - wcc-sim>=0.1.1
+      - lazuli-exo>=0.1.2
       - lazuli-astrosim-data 
       - skysurvey 
 

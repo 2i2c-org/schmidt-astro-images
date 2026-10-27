@@ -48,6 +48,10 @@ dependencies:
       # Argus (argus_sim is not on PyPI; it lives in the hackathon repo)
       - argus_sim @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=argus/argus_survey_model
       - redback # needed for tutorial_survey_data.ipynb but not listed as dep so adding here
+      - argex # new for their prototype-data notebooks
+      - confluent-kafka # new for their argus-night-live notebook
+      - orjson # new for their argus-night-live notebook
+      - structlog # new for their argus-night-live notebook
 
       # DSA-2000 helper package, same repo
       - dsahackathon2026-release @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=dsa/hackathon2026

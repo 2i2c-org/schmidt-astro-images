@@ -32,4 +32,11 @@ COPY managed-settings.json budget-statusline.py /etc/claude-code/
 
 # Open Markdown files in the rendered preview by default instead of the text editor.
 # We assume the base image does not provide its own overrides.json, so we can just copy in our version.
-COPY overrides.json ${NB_PYTHON_PREFIX}/share/jupyter/lab/settings/overrides.json
+# First, check if the overrides.json already exists from a higher layer and fail if we would overwrite it
+ARG JUPYTERLAB_OVERRIDES=${NB_PYTHON_PREFIX}/share/jupyter/lab/settings/overrides.json
+RUN if [ -e "${JUPYTERLAB_OVERRIDES}" ]; then \
+      echo "ERROR: ${JUPYTERLAB_OVERRIDES} already exists; merge instead of overwriting" >&2; \
+      cat "${JUPYTERLAB_OVERRIDES}" >&2; \
+      exit 1; \
+    fi
+COPY overrides.json ${JUPYTERLAB_OVERRIDES}

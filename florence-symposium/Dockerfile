@@ -29,3 +29,7 @@ ENV ANTHROPIC_MODEL=sonnet \
 #   enabledPlugins          installs these three plugins at each user's first session
 # See https://code.claude.com/docs/en/managed-settings
 COPY managed-settings.json budget-statusline.py /etc/claude-code/
+
+# Open Markdown files in the rendered preview by default instead of the text editor.
+# We assume the base image does not provide its own overrides.json, so we can just copy in our version.
+COPY overrides.json ${NB_PYTHON_PREFIX}/share/jupyter/lab/settings/overrides.json

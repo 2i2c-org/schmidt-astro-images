@@ -23,7 +23,7 @@ ENV ANTHROPIC_MODEL=sonnet \
 
 # Hub-wide Claude Code managed settings: apply to every user and can't be overridden.
 #   availableModels         only Sonnet and Haiku can be picked in /model or user settings
-#   permissions.defaultMode sessions start in manual mode, not auto; users can still Shift+Tab to auto
+#   permissions.defaultMode sessions start in auto mode; users can still Shift+Tab to other modes
 #   statusLine              shows today's (UTC) LiteLLM spend against the $20 daily budget
 #   extraKnownMarketplaces  registers the uw-ssec/rse-plugins marketplace from GitHub
 #   enabledPlugins          installs these three plugins at each user's first session

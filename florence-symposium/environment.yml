@@ -57,7 +57,7 @@ dependencies:
       - dsahackathon2026-release @ git+https://github.com/schmidt-observatories/science-symposium-2026-hackathon-materials.git#subdirectory=dsa/hackathon2026
 
       # LFAST -- their ETC is now on PyPI as of Oct 29, 2026
-      - lfast-etc
+      - lfast-etc>=0.1.2
 
       # VISS notebooks talk to the gateway through the litellm SDK. Pinned (the VISS repo asks for
       # >=1.50.0). It requires a newer boto3, which is bumped up earlier.

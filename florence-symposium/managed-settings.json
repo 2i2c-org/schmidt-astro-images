@@ -1,7 +1,8 @@
 {
   "availableModels": [
     "sonnet",
-    "haiku"
+    "haiku",
+    "opus"
   ],
   "permissions": {
     "defaultMode": "auto"
